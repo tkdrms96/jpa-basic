@@ -49,6 +49,18 @@ public class JpaMain {
             em.persist(member);
 
             em.flush(); // DB에 반영
+
+            // ---- 5. 준 영속 상태
+            Member member2 = em.find(Member.class, 150L);
+            member.setName("AAAAA");
+
+            //case 1 : 특정 한개의 영속성 컨텍스트에서 제외시킬때
+            //em.detach(member2);
+            //case 2 : 영속성 컨텍스트의 완전 초기화
+            //em.clear();
+            //case 3 : 영속성 컨텍스트를 종료
+            //em.close();
+            System.out.println("준영속 : " + member2);
             tx.commit(); // 트랜젝션 실행
         }catch (Exception e){
             tx.rollback();
