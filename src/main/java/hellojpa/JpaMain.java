@@ -62,9 +62,9 @@ public class JpaMain {
             //em.close();
             System.out.println("준영속 : " + member2);
             tx.commit(); // 트랜젝션 실행
-        }catch (Exception e){
+        } catch (Exception e){
             tx.rollback();
-        }finally {
+        } finally {
             em.close();
         }
         emf.close();
