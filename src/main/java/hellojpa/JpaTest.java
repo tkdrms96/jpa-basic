@@ -17,15 +17,22 @@ public class JpaTest {
         tx.begin();
 
         try {
-            Member member = new Member(5L, "member");
-            member.setName("zzzz");
+
+            //팀 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+            //회원 저장
+            Member member = new Member();
+            member.setName("member1");
+            member.setTeamId(team.getId());
             em.persist(member);
-            System.out.println("before flush");
-            em.flush();
-            System.out.println("after flush");
+
             tx.commit();
         }catch (Exception e ){
-
+            tx.rollback();
+        }finally {
+            em.close();
         }
 
     }

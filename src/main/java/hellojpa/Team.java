@@ -1,17 +1,15 @@
 package hellojpa;
-import org.hibernate.annotations.Generated;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
-public class Member {
-
+public class Team {
     @Id @GeneratedValue
     private Long id;
-    @Column(name = "USERNAME")
     private String name;
-    @Column(name = "TEAM_ID")
-    private Long teamId;
 
     public void setId(Long id) {
         this.id = id;
@@ -21,19 +19,11 @@ public class Member {
         this.name = name;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
-    }
-
     public Long getId() {
         return id;
     }
 
     public String getName() {
         return name;
-    }
-
-    public Long getTeamId() {
-        return teamId;
     }
 }
