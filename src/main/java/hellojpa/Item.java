@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Item {
+public class Item extends BaseEntity{
     @Id @GeneratedValue
     private Long id;
     private String name;
