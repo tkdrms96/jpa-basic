@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
 
@@ -15,18 +16,20 @@ public class JpaMain {
 
         /* 예외처리 */
         try {
-            //movie 등록
-            Movie movie = new Movie();
-            movie.setDirector("aaaa");
-            movie.setName("바람과 함께 사라지다.");
-            movie.setPrice(10000);
+            //@OneToMany -- default EAGER
 
-            em.persist(movie);
+            //@ManyToOne LAZY -- default LAZY
+            Member member = new Member();
+            member.setUserName("zxzxzx");
+            em.persist(member);
+
+            em.flush();
             em.clear();
-            em.clear();
 
-            Movie findMove = em.find(Movie.class, movie.getId());
+            Member findMember = em.find(Member.class, 1L);
 
+            Team team = findMember.getTeam();
+            System.out.println(team.getName());
             tx.commit();
         }catch (Exception e){
             tx.rollback();
