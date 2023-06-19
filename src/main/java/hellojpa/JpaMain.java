@@ -16,20 +16,19 @@ public class JpaMain {
 
         /* 예외처리 */
         try {
-            //@OneToMany -- default EAGER
+            Parent parent = new Parent();
 
-            //@ManyToOne LAZY -- default LAZY
-            Member member = new Member();
-            member.setUserName("zxzxzx");
-            em.persist(member);
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            parent.addchild(child1);
+            parent.addchild(child2);
+            em.persist(parent);
+            parent.getChildes().remove(child1);
 
             em.flush();
             em.clear();
 
-            Member findMember = em.find(Member.class, 1L);
-
-            Team team = findMember.getTeam();
-            System.out.println(team.getName());
             tx.commit();
         }catch (Exception e){
             tx.rollback();
