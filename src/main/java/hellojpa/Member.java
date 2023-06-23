@@ -1,6 +1,9 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Member extends BaseEntity{
@@ -12,9 +15,12 @@ public class Member extends BaseEntity{
     @Column(name="USERNAME")
     private String userName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Team team;
+    @Embedded
+    private Address homeAddress;
+
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    private List<Address> addressHistory= new ArrayList<>();
 
     public Long getId() {
         return id;
